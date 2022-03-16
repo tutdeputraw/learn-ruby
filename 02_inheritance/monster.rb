@@ -1,8 +1,8 @@
-require_relative 'burnt_effect'
+require_relative 'burnt_attack_history'
 
 class Monster
   attr_reader :name, :attack_point
-  attr_accessor :burnt_effect, :frozen_turn, :hitpoint
+  attr_accessor :burnt_effect, :frozen_turn, :burn_turn, :hitpoint
 
   def initialize(name, hitpoint, attack_point)
     @name = name
@@ -10,11 +10,20 @@ class Monster
     @attack_point = attack_point
     @burnt_effect = []
     @frozen_turn = -1
+    @burn_turn = 0
   end
 
   def to_s
-    if @hitpoint > 0
-      "#{@name}[#{@hitpoint}]"
+    if @hitpoint.positive?
+      status = if frozen? then
+                 '[frozen]'
+               elsif burnt? then
+                 '[burnt]'
+               else
+                 ''
+               end
+
+      "#{@name}[#{@hitpoint}]" + status
     else
       "#{@name}[X]"
     end
@@ -31,10 +40,13 @@ class Monster
     @frozen_turn >= 0
   end
 
+  def burnt?
+    @burn_turn.positive?
+  end
+
   def take_damage(amount)
     @hitpoint -= amount
   end
 
   def execute_next_turn; end
-
 end
