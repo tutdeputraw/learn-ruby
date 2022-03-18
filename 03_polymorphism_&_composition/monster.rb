@@ -2,16 +2,16 @@ class Monster
   attr_reader :name,
               :attack_point
   attr_accessor :hit_point,
-                :total_frozen_turn,
-                :total_burnt_turn,
+                :frozen_turn_total,
+                :burnt_turn_total,
                 :burnt_attack_point
 
   def initialize(name, hit_point, attack_point)
     @name = name
     @hit_point = hit_point
     @attack_point = attack_point
-    @total_frozen_turn = 0
-    @total_burnt_turn = 0
+    @frozen_turn_total = 0
+    @burnt_turn_total = 0
     @burnt_attack_point = 0
   end
 
@@ -39,11 +39,11 @@ class Monster
   end
 
   def frozen?
-    @total_frozen_turn.positive?
+    @frozen_turn_total.positive?
   end
 
   def burnt?
-    @total_burnt_turn.positive?
+    @burnt_turn_total.positive?
   end
 
   def take_damage(amount)
@@ -58,13 +58,13 @@ class Monster
   def receive_frozen_efect
     return unless frozen?
 
-    @total_frozen_turn -= 1
+    @frozen_turn_total -= 1
   end
 
   def receive_burnt_efect
     return unless burnt?
 
     take_damage(@burnt_attack_point)
-    @total_burnt_turn -= 1
+    @burnt_turn_total -= 1
   end
 end

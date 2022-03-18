@@ -1,7 +1,7 @@
 class IceMonster < Monster
   def attack(monster)
     monster.take_damage(0.8 * @attack_point)
-    monster.total_frozen_turn += 1
+    monster.frozen_turn_total += 1
 
     take_damage(0.5 * monster.attack_point)
 

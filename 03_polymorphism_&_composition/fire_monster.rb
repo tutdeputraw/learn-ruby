@@ -1,7 +1,7 @@
 class FireMonster < Monster
   def attack(monster)
     monster.burnt_attack_point = 0.4 * @attack_point
-    monster.total_burnt_turn += 3
+    monster.burnt_turn_total += 3
 
     take_damage(0.5 * monster.attack_point)
 

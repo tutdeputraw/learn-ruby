@@ -9,7 +9,7 @@ class SpellCard
   end
 
   def attack(monster)
-    monster.total_burnt_turn += 1
+    monster.burnt_turn_total += 1
 
     puts "casts #{@name} spell on enemy's #{monster.name}"
   end
