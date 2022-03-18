@@ -40,6 +40,10 @@ class Player
   end
 
   def apply_effects
-    @cards.each(&:apply_effects)
+    @cards.each do |card|
+      next unless card.respond_to? :apply_effects
+
+      card.apply_effects
+    end
   end
 end
